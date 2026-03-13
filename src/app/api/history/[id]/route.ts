@@ -5,8 +5,9 @@ import { History } from "@/models/History";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   const user = await getUserFromRequest(request);
   if (!user) {
     return NextResponse.json({ ok: false, message: "Unauthorized" }, { status: 401 });
@@ -14,7 +15,7 @@ export async function GET(
 
   try {
     await connectToDatabase();
-    const item = await History.findById(params.id).lean();
+    const item = await History.findById(id).lean();
 
     if (!item) {
       return NextResponse.json({ ok: false, message: "Not found" }, { status: 404 });
@@ -32,8 +33,9 @@ export async function GET(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   const user = await getUserFromRequest(request);
   if (!user) {
     return NextResponse.json({ ok: false, message: "Unauthorized" }, { status: 401 });
@@ -41,13 +43,13 @@ export async function DELETE(
 
   try {
     await connectToDatabase();
-    const item = await History.findById(params.id);
+    const item = await History.findById(id);
 
     if (!item || String(item.userId) !== String(user._id)) {
       return NextResponse.json({ ok: false, message: "Not found" }, { status: 404 });
     }
 
-    const result = await History.deleteOne({ _id: params.id });
+    const result = await History.deleteOne({ _id: id });
 
     if (result.deletedCount === 0) {
       return NextResponse.json({ ok: false, message: "Not found" }, { status: 404 });
