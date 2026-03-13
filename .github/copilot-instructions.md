@@ -1,0 +1,5 @@
+- Verify that the copilot-instructions.md file in the .github directory is created.
+- Project summary: Single Next.js app with API routes; project name "your-wish".
+- Work through each checklist item systematically.
+- Keep communication concise and focused.
+- Follow development best practices.
