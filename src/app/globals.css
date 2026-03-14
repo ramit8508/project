@@ -42,6 +42,7 @@ body {
   background-image:
     radial-gradient(circle at top left, rgba(109, 124, 255, 0.28), transparent 58%),
     radial-gradient(circle at bottom right, rgba(76, 198, 167, 0.22), transparent 52%);
+  overflow-x: hidden;
   color: var(--foreground);
   font-family: var(--font-space-grotesk), sans-serif;
   color-scheme: light dark;

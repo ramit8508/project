@@ -110,18 +110,21 @@ export default async function Home() {
         </aside>
 
         <main className="flex min-h-screen flex-col">
-          <header className="flex items-center justify-between border-b border-[var(--border)] px-6 py-4">
+          <header className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border)] px-4 py-3 sm:px-6 sm:py-4">
             <div>
               <p className="text-sm text-[var(--muted)]">
                 Model: GPT
               </p>
               <h1 className="text-lg font-semibold">Chat</h1>
             </div>
-            <div className="flex items-center gap-3 lg:hidden">
+            <div className="flex flex-wrap items-center justify-end gap-2 lg:hidden">
+              <HistoryToggleButton className="rounded-full border border-[var(--border)] px-3 py-1 text-xs text-[var(--muted)] hover:text-[var(--foreground)]" />
               <ThemeToggle />
               {user ? (
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-[var(--muted)]">{user.email}</span>
+                  <span className="hidden text-xs text-[var(--muted)] sm:inline sm:max-w-[180px] sm:truncate">
+                    {user.email}
+                  </span>
                   <LogoutButton />
                 </div>
               ) : (
